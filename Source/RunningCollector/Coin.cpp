@@ -11,18 +11,21 @@ ACoin::ACoin()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CoinMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CoinMesh"));
+	CoinMesh->SetGenerateOverlapEvents(true);
 	RootComponent = CoinMesh;
 
-	if (CoinMesh)
-	{
-		CoinMesh->OnComponentBeginOverlap.AddDynamic(this, &ACoin::OnBeginOverlap);
-	}
+	
 }
 
 // Called when the game starts or when spawned
 void ACoin::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (CoinMesh)
+	{
+		CoinMesh->OnComponentBeginOverlap.AddDynamic(this, &ACoin::OnBeginOverlap);
+	}
 }
 
 void ACoin::OnBeginOverlap(UPrimitiveComponent* hitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, 

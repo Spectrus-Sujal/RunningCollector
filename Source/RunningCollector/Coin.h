@@ -26,4 +26,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+protected:
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Setup)
+	UStaticMeshComponent* CoinMesh;
+
 };

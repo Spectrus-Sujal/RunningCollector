@@ -68,4 +68,9 @@ protected:
 
 	bool gamePaused = false;
 
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Score = 0;
+
 };

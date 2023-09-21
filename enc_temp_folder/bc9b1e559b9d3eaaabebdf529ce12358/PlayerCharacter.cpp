@@ -74,7 +74,7 @@ void APlayerCharacter::MoveRightLeft(const FInputActionValue& Value)
 {
 	const float MovementAxis = Value.Get<float>();
 
-	if(!GamePaused)
+	if(!gamePaused)
 	{
 		const FVector PlayerForce = PlayerMesh->GetRightVector() * (MovementAxis * SideSpeed);
 		PlayerMesh->AddForce(PlayerForce, NAME_None, true);
@@ -85,7 +85,7 @@ void APlayerCharacter::MoveFrontBack(const FInputActionValue& Value)
 {
 	const float MovementAxis = Value.Get<float>();
 
-	if(!GamePaused)
+	if(!gamePaused)
 	{
 		const FVector PlayerForce = PlayerMesh->GetForwardVector() * (MovementAxis * ForwardSpeed);
 		PlayerMesh->AddForce(PlayerForce, NAME_None, true);
@@ -95,22 +95,5 @@ void APlayerCharacter::MoveFrontBack(const FInputActionValue& Value)
 void APlayerCharacter::PauseGame(const FInputActionValue& Value)
 {
 	ARunningCollectorGameMode* gamemode = Cast<ARunningCollectorGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
-
-	APlayerController* player = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController());
-
-	if(player)
-	{
-		GamePaused = player->SetPause(!GamePaused);
-		OnGameStateChanged.Broadcast();
-	}
-}
-
-bool APlayerCharacter::OnGameStateChanged()
-{
-	return IsGamePaused;
-}
-
-void APlayerCharacter::OnGameEnded()
-{
 }
 

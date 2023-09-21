@@ -3,7 +3,3 @@
 
 #include "RunningCollectorGameMode.h"
 
-void ARunningCollectorGameMode::PauseGame(bool state)
-{
-	SetGamePaused
-}

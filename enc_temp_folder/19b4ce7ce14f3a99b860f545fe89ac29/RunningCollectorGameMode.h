@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "InputActionValue.h"
 #include "RunningCollectorGameMode.generated.h"
 
 /**
@@ -18,9 +19,12 @@ class RUNNINGCOLLECTOR_API ARunningCollectorGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
-public:
+protected:
 
-	UFUNCTION()
-	void PauseGame(bool state);
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputMappingContext* MappingContext;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* PauseButton;
 	
 };

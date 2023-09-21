@@ -72,7 +72,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float SideSpeed = 1800.0f;
 
-	bool GamePaused = false;
+	bool gamePaused = false;
 
 public:
 
@@ -81,13 +81,5 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Game State")
 	bool IsGamePaused;
-
-	// Delegate signature
-	DECLARE_MULTICAST_DELEGATE(FOnGameStateChangedSignature)
-	bool OnGameStateChanged();
-
-	// Delegate signature
-	DECLARE_MULTICAST_DELEGATE(FOnGameEndedSignature)
-	void OnGameEnded();
 
 };

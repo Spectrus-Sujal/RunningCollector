@@ -18,9 +18,30 @@ class RUNNINGCOLLECTOR_API ARunningCollectorGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
-public:
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 
 	UFUNCTION()
 	void PauseGame(bool state);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxTime = 60;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float CurrentTime = 60;
+
+
+	// Delegate signature
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameEndedSignature);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FOnGameEndedSignature OnGameEndedDelegate;
 	
 };

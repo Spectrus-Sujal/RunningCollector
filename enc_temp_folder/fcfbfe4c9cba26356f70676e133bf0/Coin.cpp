@@ -23,12 +23,15 @@ void ACoin::BeginPlay()
 	if (CoinMesh)
 	{
 		CoinMesh->OnComponentBeginOverlap.AddDynamic(this, &ACoin::OnBeginOverlap);
+		
+		UE_LOG(LogTemp, Warning, TEXT("%b"), CoinMesh->OnComponentBeginOverlap.IsBound());
 	}
 }
 
 void ACoin::OnBeginOverlap(UPrimitiveComponent* hitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, 
 						   int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	
 	UE_LOG(LogTemp, Warning, TEXT("Done Overlap"));
 	APlayerCharacter* player = Cast<APlayerCharacter>(OtherActor);
 

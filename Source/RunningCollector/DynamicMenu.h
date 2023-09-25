@@ -9,9 +9,24 @@
 /**
  * 
  */
+
 UCLASS()
 class RUNNINGCOLLECTOR_API UDynamicMenu : public UUserWidget
 {
 	GENERATED_BODY()
 	
+public:
+
+	virtual void NativeConstruct() override;
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void PlayPauseGame(bool paused);
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void ShowEndScreen();
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void ChangeMenuState();
+
 };
+

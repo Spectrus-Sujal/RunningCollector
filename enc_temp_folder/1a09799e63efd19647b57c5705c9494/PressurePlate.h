@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Coin.generated.h"
+#include "PressurePlate.generated.h"
 
 UCLASS()
-class RUNNINGCOLLECTOR_API ACoin : public AActor
+class RUNNINGCOLLECTOR_API APressurePlate : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ACoin();
+	APressurePlate();
 
 protected:
 	// Called when the game starts or when spawned
@@ -27,16 +27,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-protected:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPresureTriggeredSignature);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Setup)
-	UStaticMeshComponent* CoinMesh;
-
-	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Setup)
-	FCollisionShape* Collider;*/
-
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = "true"))
-	int ScoreValue = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FOnPresureTriggeredSignature PresureDetectedDelegate;
 
 };

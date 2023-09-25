@@ -66,6 +66,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	{
 		EnhancedInputComponent->BindAction(MoveActionLeftRight, ETriggerEvent::Triggered, this, &APlayerCharacter::MoveRightLeft);
 		EnhancedInputComponent->BindAction(MoveActionFrontBack, ETriggerEvent::Triggered, this, &APlayerCharacter::MoveFrontBack);
+		EnhancedInputComponent->BindAction(PlayPause, ETriggerEvent::Triggered, this, &APlayerCharacter::PauseGame);
 	}
 
 }
@@ -94,23 +95,15 @@ void APlayerCharacter::MoveFrontBack(const FInputActionValue& Value)
 
 void APlayerCharacter::PauseGame(const FInputActionValue& Value)
 {
-	ARunningCollectorGameMode* gamemode = Cast<ARunningCollectorGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	GamePaused = !GamePaused;
 
-	APlayerController* player = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController());
-
-	if(player)
-	{
-		GamePaused = player->SetPause(!GamePaused);
-		OnGameStateChanged.Broadcast();
-	}
+	OnGameStateChangedDelegate.Broadcast(GamePaused);
 }
 
-bool APlayerCharacter::OnGameStateChanged()
+void APlayerCharacter::UnPauseGame()
 {
-	return IsGamePaused;
-}
+	GamePaused = false;
 
-void APlayerCharacter::OnGameEnded()
-{
+	OnGameStateChangedDelegate.Broadcast(GamePaused);
 }
 

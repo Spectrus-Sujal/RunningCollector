@@ -55,6 +55,8 @@ protected:
 
 	void PauseGame(const FInputActionValue& Value);
 
+protected:
+
 	// ASSET COMPONENTS
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Setup)
 	UStaticMeshComponent* PlayerMesh;
@@ -72,22 +74,23 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float SideSpeed = 1800.0f;
 
-	bool GamePaused = false;
-
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Score = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Game State")
-	bool IsGamePaused;
+	bool GamePaused = false;
 
+	
 	// Delegate signature
-	DECLARE_MULTICAST_DELEGATE(FOnGameStateChangedSignature)
-	bool OnGameStateChanged();
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameStateChangedSignature, bool, state);
 
-	// Delegate signature
-	DECLARE_MULTICAST_DELEGATE(FOnGameEndedSignature)
-	void OnGameEnded();
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FOnGameStateChangedSignature OnGameStateChangedDelegate;
+
+
+	UFUNCTION(BlueprintCallable)
+	void UnPauseGame();
 
 };

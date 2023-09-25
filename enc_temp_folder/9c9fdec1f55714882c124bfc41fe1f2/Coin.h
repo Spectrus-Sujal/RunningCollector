@@ -32,9 +32,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Setup)
 	UStaticMeshComponent* CoinMesh;
 
-	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Setup)
-	FCollisionShape* Collider;*/
-
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = "true"))
 	int ScoreValue = 1;

@@ -32,7 +32,7 @@ public:
 	void PauseGame(bool state);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float MaxTime = 60;
+	float MaxTime = 5;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float CurrentTime = 60;
